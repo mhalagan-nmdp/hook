@@ -29,7 +29,7 @@ spark-submit \
 
 export BAMFILE=$HDFS_PATH/$SAMPLE.bam
 export BAMOUT=$HDFS_PATH/$SAMPLE.mhc.bam
-adam-shell -i extract-mhc.scala $HDFS_PATH/$SAMPLE.bam $HDFS_PATH/$SAMPLE.mhc.bam
+adam-shell -i extract-mhc.scala
 
 echo "uploading $HDFS_PATH/$SAMPLE.mhc.bam to $DEST_DIR..."
 spark-submit \
