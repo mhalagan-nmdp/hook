@@ -14,6 +14,7 @@ hadoop fs -mkdir -p "$HDFS_DIR"
 
 echo "downloading $SRC_DIR/$SAMPLE.bam to $HDFS_PATH/$SAMPLE.bam..."
 spark-submit \
+    --executor-memory 30G \
     conductor-0.5-SNAPSHOT/conductor-0.5-SNAPSHOT-distribution.jar \
     $SRC_DIR/$SAMPLE.bam \
     $HDFS_PATH/$SAMPLE.bam \
@@ -32,6 +33,7 @@ adam-shell -i extract-mhc.scala $HDFS_PATH/$SAMPLE.bam $HDFS_PATH/$SAMPLE.mhc.ba
 
 echo "uploading $HDFS_PATH/$SAMPLE.mhc.bam to $DEST_DIR..."
 spark-submit \
+    --executor-memory 30G \
     conductor-0.5-SNAPSHOT/conductor-0.5-SNAPSHOT-distribution.jar \
     $HDFS_PATH/$SAMPLE.mhc.bam \
     $DEST_DIR/$SAMPLE.mhc.bam \
