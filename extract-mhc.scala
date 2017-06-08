@@ -9,5 +9,4 @@ val alignments = sc.loadIndexedBam(bamfile, mhc)
 val filteredAlignments = alignments.transform(rdd => {        rdd.filter(_.getReadMapped)      })
 val alignmentsSorted = filteredAlignments.sortLexicographically()
 alignmentsSorted.saveAsSam(outbam, asSingleFile = true)
-
-
+exit()
