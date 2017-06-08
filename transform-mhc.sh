@@ -26,10 +26,15 @@ spark-submit \
     $HDFS_PATH/$SAMPLE.bam.bai \
     --concat
 
+export BAMFILE=$HDFS_PATH/$SAMPLE.bam
+export BAMOUT=$HDFS_PATH/$SAMPLE.mhc.bam
 adam-shell -i extract-mhc.scala $HDFS_PATH/$SAMPLE.bam $HDFS_PATH/$SAMPLE.mhc.bam
 
 echo "uploading $HDFS_PATH/$SAMPLE.mhc.bam to $DEST_DIR..."
 spark-submit \
     conductor-0.5-SNAPSHOT/conductor-0.5-SNAPSHOT-distribution.jar \
     $HDFS_PATH/$SAMPLE.mhc.bam \
-    $DEST_DIR/$SAMPLE.mhc.bam
+    $DEST_DIR/$SAMPLE.mhc.bam \
+    --concat
+
+hdfs dfs -rm -r -f hdfs://spark-master:8020/data
